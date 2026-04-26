@@ -45,7 +45,7 @@ namespace Store.API.Controllers
         public async Task<ActionResult<UserDto>> RegisterAsync(RegisterDto register)
         {
             var user = await _userServices.RegisterAsync(register);
-            if (user == null) return BadRequest(new ApiErrorResponse(StatusCodes.Status400BadRequest, "Invalid Registertion"));
+            if (user == null) return BadRequest(new ApiErrorResponse(StatusCodes.Status400BadRequest, "Invalid Registration"));
             return Ok(user);
         }
         [Authorize]
@@ -72,7 +72,7 @@ namespace Store.API.Controllers
             return Ok(_mapper.Map<AddressDto>(user.Address));
         }
         [Authorize]
-        [HttpPost("Address")]
+        [HttpPut("Address")]
         public async Task<ActionResult<AddressDto>> UpdateCurrentUserAddress(AddressDto address)
         {
             var user = await _userManager.FindByEmailWithAddressAsync(User);
